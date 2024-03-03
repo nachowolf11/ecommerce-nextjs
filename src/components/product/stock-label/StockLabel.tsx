@@ -5,28 +5,40 @@ import { titleFont } from "@/config/fonts"
 import { useEffect, useState } from "react";
 
 interface Props {
-    slug: string;
+  slug: string;
 }
 
-export const StockLabel = ({ slug }:Props) => {
+export const StockLabel = ({ slug }: Props) => {
 
-    const [stock, setStock] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
+  const [stock, setStock] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        getStock();
-    }, [])
-    
+  useEffect(() => {
+    getStock();
+  }, [])
 
-    const getStock = async() => {
-        const stock = await getStockBySlug(slug);
-        setStock(stock);
-        setIsLoading(false);
-    }
+
+  const getStock = async () => {
+    const stock = await getStockBySlug(slug);
+    setStock(stock);
+    setIsLoading(false);
+  }
 
   return (
-    <h1 className={ ` ${ titleFont.className } antialiased font-bold text-xl` }>
-    Stock: { stock }
-  </h1>
+    <>
+    {
+      isLoading 
+      ? (
+        <h1 className={` ${titleFont.className} antialiased font-bold text-xl bg-gray-200`}>
+          &nbsp;
+        </h1>
+      )
+      : (
+        <h1 className={` ${titleFont.className} antialiased font-bold text-xl`}>
+          Stock: {stock}
+        </h1>
+      )
+    }
+    </>
   )
 }
