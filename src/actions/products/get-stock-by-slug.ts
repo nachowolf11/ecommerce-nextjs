@@ -16,7 +16,6 @@ export const getStockBySlug = async( slug: string ):Promise<number> => {
 
         return product.inStock;
     } catch (error) {
-        console.log(error);
         throw new Error('Error al obtener stock por slug')
     }
 }
