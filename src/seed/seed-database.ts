@@ -4,31 +4,36 @@ import { initialData } from './seed';
 async function main() {
 
     // 1. Borrar registros previos.
-        await prisma.productImage.deleteMany(),
-        await prisma.product.deleteMany(),
-        await prisma.category.deleteMany()
+    await prisma.user.deleteMany();
+    await prisma.productImage.deleteMany();
+    await prisma.product.deleteMany();
+    await prisma.category.deleteMany();
 
-    const { categories, products } =  initialData;
+    const { categories, products, users } = initialData;
+
+    await prisma.user.createMany({
+        data: users
+    });
 
     // Categorias
-    const categoriesData = categories.map( (name) => ({name}));
+    const categoriesData = categories.map((name) => ({ name }));
     await prisma.category.createMany({
         data: categoriesData
     });
 
     const categoriesDB = await prisma.category.findMany();
 
-    const categoriesMap = categoriesDB.reduce( (map, category) => {
+    const categoriesMap = categoriesDB.reduce((map, category) => {
 
-        map[ category.name.toLowerCase() ] = category.id
+        map[category.name.toLowerCase()] = category.id
 
         return map;
     }, {} as Record<string, string>);
-    
+
 
     // Productos
-    products.forEach( async(product) => {
-        
+    products.forEach(async (product) => {
+
         const { type, images, ...rest } = product;
 
         const dbProduct = await prisma.product.create({
@@ -39,7 +44,7 @@ async function main() {
         });
 
         // Images
-        const imagesData = images.map( image => ({
+        const imagesData = images.map(image => ({
             url: image,
             productId: dbProduct.id
         }));
@@ -50,10 +55,10 @@ async function main() {
     })
 
     console.log('Seed ejecutado correctamente');
-    
+
 }
 
 (() => {
-    if( process.env.NODE_ENV === 'production' )return;
+    if (process.env.NODE_ENV === 'production') return;
     main();
 })();
