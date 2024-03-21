@@ -1,4 +1,5 @@
-import NextAuth, { type NextAuthConfig } from 'next-auth';
+import NextAuth, { User, type NextAuthConfig } from 'next-auth';
+import { AdapterUser } from 'next-auth/adapters';
 import credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import prisma from './lib/prisma';
@@ -9,6 +10,23 @@ export const authConfig: NextAuthConfig = {
         signIn: '/auth/login',
         newUser: '/auth/new-account',
     },
+
+    callbacks: {
+        jwt({ token, user }) {
+            if ( user ) {
+                token.data = user;
+            }
+
+            return token;
+        },
+
+        session({ session, token }) {
+            console.log({session, token});
+            session.user = token.data as any;
+            return session;
+        }
+    },
+
     providers: [
 
         credentials({
@@ -30,8 +48,8 @@ export const authConfig: NextAuthConfig = {
 
                 if (!bcryptjs.compareSync(password, user.password)) return null;
 
-                const { password:_, ...rest } = user;
-                
+                const { password: _, ...rest } = user;
+
                 return rest;
             },
         }),
