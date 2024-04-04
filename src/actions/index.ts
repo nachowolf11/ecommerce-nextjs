@@ -11,3 +11,5 @@ export * from './address/get-user-address'
 export * from './auth/login'
 export * from './auth/logout'
 export * from './auth/register'
+
+export * from './order/place-order'
