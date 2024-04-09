@@ -14,3 +14,4 @@ export * from './auth/register'
 
 export * from './order/place-order'
 export * from './order/get-order-by-id'
+export * from './order/get-order-by-user'

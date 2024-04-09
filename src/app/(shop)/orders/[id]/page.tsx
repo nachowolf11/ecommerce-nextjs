@@ -18,8 +18,6 @@ export default async function OrderByIdPage( { params }: Props ) {
   const { id } = params;
 
   const { order } = await getOrderById(id);
-  console.log(order?.OrderItem[0].product.slug);
-  
 
   // Todo: verificar
   // redirect(/)
