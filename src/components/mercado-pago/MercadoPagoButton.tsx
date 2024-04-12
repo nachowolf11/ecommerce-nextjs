@@ -15,47 +15,33 @@ interface Props {
 
 export const MercadoPagoButton = ({ orderId, amount }: Props) => {
 
-    const [preferenceId, setPreferenceId] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const onSubmit = async () => {
 
-    useEffect(() => {
-        getPreferenceId();
-    }, [])
-
-
-    const getPreferenceId = () => {
-        setIsLoading(true);
-        fetch("/api/createPreference", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                orderId: orderId,
-                amount: amount
-            }),
-            cache: 'no-cache'
-        })
-            .then((response) => {
-                return response.json();
+        return new Promise((resolve, reject) => {
+            fetch("/api/createPreference", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    orderId: orderId,
+                    amount: amount
+                }),
+                cache: 'no-cache'
             })
-            .then((preference) => {
-                setPreferenceId(preference.id);
-            })
-            .catch((error) => {
-                console.error(error);
-            }).finally(() => {
-                setIsLoading(false);
-            })
+                .then((response) => response.json())
+                .then((response) => {
+                    resolve(response.id);
+                })
+                .catch((error) => {
+                    reject();
+                });
+        });
     };
 
     return (
-        <>
-            {
-                preferenceId && (
-                    <Wallet initialization={{ preferenceId: preferenceId }} />
-                )
-            }
-        </>
+        <Wallet
+            onSubmit={onSubmit}
+        />
     )
 }

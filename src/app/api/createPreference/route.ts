@@ -23,10 +23,12 @@ export async function POST(request: Request) {
                     }
                 ],
                 back_urls:{
-                    success: 'http://localhost:3000/',
-                    failure: 'http://localhost:3000/',
-                    pending: 'http://localhost:3000/'
+                    success: `http://localhost:3000/orders/${orderId}`,
+                    failure: `http://localhost:3000/orders/${orderId}`,
+                    pending: `http://localhost:3000/orders/${orderId}`
                 },
+                auto_return: "approved",
+                notification_url: "https://d6d7-190-189-226-47.ngrok-free.app/api/webhook?source_news=webhooks"
             }
         })
 
@@ -37,8 +39,4 @@ export async function POST(request: Request) {
         return NextResponse.json( error['errors'] ,{ status:400 } );
         
     }
-
-
-
-
 }
