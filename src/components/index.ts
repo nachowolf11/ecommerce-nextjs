@@ -19,6 +19,7 @@ export * from './product/stock-label/StockLabel';
 
 export * from './product/quantity-selector/QuantitySelector';
 export * from './product/size-selector/SizeSelector';
+export * from './product/product-image/ProductImage';
 
 export * from './ui/not-found/PageNotFound';
 export * from './ui/sidebar/Sidebar';

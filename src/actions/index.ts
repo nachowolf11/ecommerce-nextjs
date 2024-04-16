@@ -18,3 +18,11 @@ export * from './order/get-order-by-user'
 export * from './order/get-paginated-orders'
 
 export * from './payment/set-transaction-id'
+
+export * from './user/get-paginated-users'
+export * from './user/change-user-role'
+
+export * from './category/get-category'
+
+export * from './product/create-update-product'
+export * from './product/delete-product-image'
