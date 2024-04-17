@@ -3,7 +3,7 @@ import { Inter, Montserrat_Alternates } from 'next/font/google';
 
 
 
-export const inter = Inter({ subsets: ['latin'] });
+export const inter = Inter({ subsets: ['latin'], display: 'swap', adjustFontFallback: false });
 
 
 export const titleFont = Montserrat_Alternates({ 
