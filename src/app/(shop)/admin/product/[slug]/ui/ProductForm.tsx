@@ -62,9 +62,11 @@ export const ProductForm = ({ product, categories }: Props) => {
     const formData = new FormData();
 
     const { images, ...productToSave } = data;
+    console.log(product);
+    
 
-    if ( product.id ){
-      formData.append("id", product.id ?? "");
+    if ( product?.id ){
+      formData.append("id", product?.id ?? "");
     }
     
     formData.append("title", productToSave.title);
@@ -226,7 +228,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {product?.ProductImage?.map((image) => (
-              <div key={image.id}>
+              <div key={image.id + image.productId}>
                 <ProductImage
                   alt={product.title ?? ""}
                   src={ image.url }
