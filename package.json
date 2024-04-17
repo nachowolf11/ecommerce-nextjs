@@ -6,9 +6,10 @@
     "dev": "next dev",
     "dev:turbo": "next dev --turbo",
     "ngrok": "ngrok http 3000",
-    "build": "next build",
+    "build": "npm run prisma:deploy && next build",
     "start": "next start",
     "lint": "next lint",
+    "prisma:deploy": "npx prisma migrate deploy && prisma generate",
     "seed": "ts-node src/seed/seed-database.ts"
   },
   "dependencies": {
