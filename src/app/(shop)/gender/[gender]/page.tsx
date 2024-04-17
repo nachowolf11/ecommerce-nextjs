@@ -2,7 +2,6 @@ export const revalidate = 60;
 
 import { getPaginatedProductsWithImages } from '@/actions';
 import { Pagination, ProductGrid, Title } from '@/components';
-import { Category } from '@/interfaces';
 import { Gender } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
@@ -29,7 +28,7 @@ export default async function GenderPage({ params, searchParams }: Props) {
     redirect('/');
   }
 
-  const labels: Record<Category, string>  = {
+  const labels: Record<string, string>  = {
     'men': 'para hombres',
     'women': 'para mujeres',
     'kid': 'para niños',
