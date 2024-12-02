@@ -4,7 +4,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     try {
-        const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_SECRET! });
+        const client = new MercadoPagoConfig({ 
+            accessToken: process.env.MERCADOPAGO_SECRET!,
+            options:{
+                integratorId: process.env.MERCADOPAGO_INTEGRATOR_ID
+            }
+         });
         const payment = new Payment(client)
     
         const data = await request.json();

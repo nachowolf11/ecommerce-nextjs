@@ -4,7 +4,7 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import { useEffect, useState } from 'react';
 initMercadoPago(process.env.NEXT_PUBLIC_MERCADOPAGO_CLIENT_ID!,
     {
-        locale: 'es-AR'
+        locale: 'es-AR',
     });
 
 
