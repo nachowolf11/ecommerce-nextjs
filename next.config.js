@@ -4,7 +4,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'livosur-web.vercel.app'
+          hostname: 'res.cloudinary.com'
         }
       ]
     }
